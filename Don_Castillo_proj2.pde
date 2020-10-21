@@ -9,15 +9,25 @@
 @desc: Global Variables
 ************************/
 
+PFont font;
+
 void setup()
 {
   // width and height of the window
   size(1000, 600);
+  
+  // default background
+  background(0);
+  
+  // load font
+  font = loadFont("Consolas-48.vlw");
+  
 }
 
 
 void draw()
 {
+  scene1();
 
 }
 
@@ -25,7 +35,10 @@ void draw()
 @desc: Scenes
 ************************/
 void scene1(){
-
+  textFont(font, 48);
+  textAlign(CENTER, CENTER);
+  fill(250);
+  text("The Invasion", width/2, height/2);
 }
 
 void scene2(){
