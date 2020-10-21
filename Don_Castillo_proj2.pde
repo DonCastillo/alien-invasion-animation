@@ -22,6 +22,36 @@ void draw()
 }
 
 /***********************
+@desc: Scenes
+************************/
+void scene1(){
+
+}
+
+void scene2(){
+
+}
+
+void scene3(){
+
+}
+
+void scene4(){
+
+}
+
+void scene5(){
+
+}
+
+void scene6(){
+
+}
+
+void scene7(){
+
+}
+/***********************
 @desc: Classes
 ************************/
 class Spaceship {
