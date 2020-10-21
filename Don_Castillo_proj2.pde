@@ -10,35 +10,28 @@
 ************************/
 
 PFont font;
+PImage space;
 
-void setup()
-{
-  // width and height of the window
-  size(1000, 600);
-  
-  // default background
-  background(0);
-  
-  // load font
-  font = loadFont("Consolas-48.vlw");
+void setup(){
+  size(1000, 600);                       // width and height of the window
+  background(0);                         // default background
+  font = loadFont("Consolas-48.vlw");    // load font
+  space = loadImage("space.jpg");        // load space image
   
 }
 
-
-void draw()
-{
+void draw(){
   scene1();
 
 }
 
 /***********************
-@desc: Scenes
+@desc: Scene 1
+       displays the title of the animation
 ************************/
-void scene1(){
-  textFont(font, 48);
-  textAlign(CENTER, CENTER);
-  fill(250);
-  text("The Invasion", width/2, height/2);
+void scene1() {
+  setBackground(space, color(201, 201, 201, 255));        // displays space image as background
+  setTitle("The Invasion");                              // displays title
 }
 
 void scene2(){
@@ -64,6 +57,30 @@ void scene6(){
 void scene7(){
 
 }
+
+/***********************
+@desc: sets the scenes title in the center
+@params:  text to be displayed
+************************/
+void setTitle(String title){
+  textFont(font, 48);
+  textAlign(CENTER, CENTER);
+  fill(250);
+  text(title, width/2, height/2);
+}
+
+
+/***********************
+@desc: sets the scenes background image
+@params:  image to be displayed
+************************/
+void setBackground(PImage pImage, color pColor){
+  tint(pColor);
+  imageMode(CENTER);
+  image(pImage, width/2, height/2, width, height); 
+}
+
+
 /***********************
 @desc: Classes
 ************************/
