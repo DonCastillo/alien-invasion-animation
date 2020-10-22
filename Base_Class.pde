@@ -8,6 +8,8 @@ class MyObject {
   float w = 0.00;  // object width
   float speed = 0.00;
   PImage image;  // object image
+  float angle = 0.00;
+  
   
   /***********************
   @desc: creates spaceship objet, initializes spaceship object specs
@@ -26,10 +28,14 @@ class MyObject {
   void setImage(PImage pImage) {
     image = pImage;
   }
+  PImage getImage(){
+    return image;
+  }
   
   void display() {
+    translate(x, y);
     imageMode(CENTER);
-    image(image, x, y, w, h);
+    image(image, 0, 0, w, h);
   }
   
   void forward() {
@@ -88,4 +94,5 @@ class MyObject {
     descend();
     forward();
   }
+ 
 }

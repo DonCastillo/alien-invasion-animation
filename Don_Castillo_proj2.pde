@@ -11,22 +11,43 @@
 
 PFont font;
 PImage space;
-Spaceship spaceship; 
+PImage rocket, yellowCar, brownCar, asteroid1, asteroid2;
+Asteroid asteroidA, asteroidB; 
+
+
 
 void setup() {
-  size(1000, 600);                       // width and height of the window
-  background(0);                         // default background
-  font = loadFont("Consolas-48.vlw");    // load font
-  space = loadImage("space.jpg");        // load space image 
-  spaceship = new Spaceship(width/2, height/2, 350, 350);
-  spaceship.setSpeed(10);
+  // width and height of the window
+  size(1000, 600);                  
+  
+  // set default background
+  background(0);       
+  
+  // load text font
+  font = loadFont("Consolas-48.vlw");  
+  
+  // load all images
+  space = loadImage("space.jpg");        
+  rocket = loadImage("rocket.png");
+  yellowCar = loadImage("yellow-car.png");
+  brownCar = loadImage("brown-car.png");
+  asteroid1 = loadImage("asteroid-1.png");
+  asteroid2 = loadImage("asteroid-2.png");
+  
+  // set all objects
+  asteroidA = new Asteroid(width/2, height/2, 350, 350);
+  asteroidA.setImage(asteroid1);
+  
 }
+
+
 
 void draw() {
   scene2();
-  //println(width++);
-
 }
+
+
+
 
 /***********************
 @desc: Scene 1
@@ -39,16 +60,8 @@ void scene1() {
 
 void scene2() {
   setBackground(space, color(201, 201, 201, 255));        // displays space image as background
-  spaceship.display();
-  //spaceship.forward();
-  //spaceship.backward();
-  //spaceship.ascend();
-  //spaceship.descend();
-  //spaceship.scaleUp();
-  //spaceship.scaleDown();
-  //spaceship.toTopLeft();
-  //spaceship.toTopRight();
-  //spaceship.toBottomRight();
+  asteroidA.rotateClockwise("backward");
+  asteroidA.setSpeed(10);
 }
 
 void scene3() {
