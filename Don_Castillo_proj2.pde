@@ -12,8 +12,9 @@
 PFont font;
 PImage space;
 PImage rocket, yellowCar, brownCar, asteroid1, asteroid2;
-Asteroid[] asteroidTop = new Asteroid[3];
-Asteroid[] asteroidBottom = new Asteroid[2];
+Asteroid[] asteroidTop = new Asteroid[2];
+Asteroid[] asteroidDiagonal = new Asteroid[1];
+Spaceship[] spaceship = new Spaceship[3];
 
 
 
@@ -36,7 +37,7 @@ void setup() {
   asteroid2 = loadImage("asteroid-2.png");
   
   // set scene objects
-  setSceneOneObjects();
+  setSceneTwoObjects();
 }
 
 
@@ -63,16 +64,22 @@ void sceneTwo() {
   
   // display top asteroids
   for(int i = 0; i < asteroidTop.length; ++i) {
-    asteroidTop[i].backward();
-    asteroidTop[i].rotateClockwise();
+      asteroidTop[i].backward();
+      asteroidTop[i].rotateClockwise();
   }
   
   // display bottom asteroids
-  for(int i = 0; i < asteroidBottom.length; ++i) {
-    asteroidBottom[i].forward();
-    asteroidBottom[i].rotateClockwise();
+  for(int i = 0; i < asteroidDiagonal.length; ++i) {
+    asteroidDiagonal[i].toBottomRight();
+    asteroidDiagonal[i].rotateClockwise();
   }
   
+  // display spaceships
+  
+  for(int i = 0; i < spaceship.length; ++i) {
+    spaceship[i].display();
+    spaceship[i].forward();
+  }
   
 }
 
@@ -97,24 +104,39 @@ void sceneSeven() {
 }
 
 
-void setSceneOneObjects() {
+void setSceneTwoObjects() {
   // set top asteroids
    for(int i = 0; i < asteroidTop.length; ++i) {
-    float dimension = random(50, 350);
+    float dimension = random(50, 300);
     float speed = random(2, 10);
-    asteroidTop[i] = new Asteroid(width + 2, random(0, height), dimension, dimension);
+    asteroidTop[i] = new Asteroid(width + 2, random(height/2, height), dimension, dimension);
     asteroidTop[i].setImage(asteroid1);
     asteroidTop[i].setSpeed(speed);
   }
   
-  // set bottom asteroids
-  for(int i = 0; i < asteroidBottom.length; ++i) {
+  // set diagonal asteroids
+  for(int i = 0; i < asteroidDiagonal.length; ++i) {
     float dimension = random(50, 150);
-    float speed = random(2, 10);
-    asteroidBottom[i] = new Asteroid(-2, random(0, height), dimension, dimension);
-    asteroidBottom[i].setImage(asteroid2);
-    asteroidBottom[i].setSpeed(speed);
+    float speed = random(2, 5);
+    asteroidDiagonal[i] = new Asteroid(-2, -2, dimension, dimension);
+    asteroidDiagonal[i].setImage(asteroid2);
+    asteroidDiagonal[i].setSpeed(speed);
   }
+  
+  // set spaceship
+  float spaceshipWidth = 250;
+  float spaceshipHeight = 250;
+  float spaceshipSpeed = 7;
+  spaceship[0] = new Spaceship(-2, height/2, spaceshipWidth, spaceshipHeight);
+  spaceship[1] = new Spaceship(-4, (height/2) - 2 , spaceshipWidth, spaceshipHeight);
+  spaceship[2] = new Spaceship(-4, (height/2) + 2 , spaceshipWidth, spaceshipHeight);
+  //spaceship[3] = new Spaceship(-8, (height/2) - 4 , spaceshipWidth, spaceshipHeight);
+  //spaceship[4] = new Spaceship(-8, (height/2) + 4 , spaceshipWidth, spaceshipHeight);
+  spaceship[0].setSpeed(spaceshipSpeed);
+  spaceship[1].setSpeed(spaceshipSpeed);
+  spaceship[2].setSpeed(spaceshipSpeed);
+  //spaceship[3].setSpeed(spaceshipSpeed);
+  //spaceship[4].setSpeed(spaceshipSpeed);
 }
 
 
