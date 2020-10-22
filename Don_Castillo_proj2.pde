@@ -10,11 +10,12 @@
 ************************/
 
 PFont font;
-PImage spaceImg, rocketImg, yellowCarImg, brownCarImg, asteroid1Img, asteroid2Img, earthImg;
+PImage spaceImg, rocketImg, yellowCarImg, brownCarImg, asteroid1Img, asteroid2Img, earthImg, fieldImg;
 Asteroid[] asteroidTop = new Asteroid[2];
 Asteroid[] asteroidDiagonal = new Asteroid[1];
 Spaceship[] spaceshipA = new Spaceship[5];
 Spaceship[] spaceshipB = new Spaceship[5];
+Spaceship spaceshipD;
 MyObject rocket, earth;
 int startTime;
 
@@ -38,6 +39,7 @@ void setup() {
   asteroid1Img = loadImage("asteroid-1.png");
   asteroid2Img = loadImage("asteroid-2.png");
   earthImg = loadImage("earth.png");
+  fieldImg = loadImage("field.jpg");
   
   // set scene objects
   setSceneTwoObjects();
@@ -48,27 +50,29 @@ void setup() {
   setSceneSevenObjects();
   
   startTime = millis();
+  frameRate(100);
 }
 
 
 
 void draw() {
-  int m = millis() - startTime;
-  if(m >= 0 && m < 5000) {
-    sceneOne();
-  }
-  else if(m >= 5000 && m < 15000) {
-    sceneTwo();
-  }
-  else if(m >= 15000 && m < 25000) {
-    sceneThree();
-  } 
-  else {
-    startTime = millis();
-    setup();
-  }
+  //int m = millis() - startTime;
+  //if(m >= 0 && m < 5000) {
+  //  sceneOne();
+  //}
+  //else if(m >= 5000 && m < 15000) {
+  //  sceneTwo();
+  //}
+  //else if(m >= 15000 && m < 25000) {
+  //  sceneThree();
+  //} 
+  //else {
+  //  startTime = millis();
+  //  setup();
+  //}
 
-  println((float)(millis()/1000));
+  //println((float)(millis()/1000));
+  sceneFive();
 
 }
 
@@ -132,7 +136,14 @@ void sceneFour() {
 }
 
 void sceneFive() {
-
+  // display background
+  setBackground(fieldImg, color(200, 200, 200, 255));
+ 
+  // displa spaceship
+  spaceshipD.display();
+  spaceshipD.scaleUp();
+  
+  
 }
 
 void sceneSix() {
@@ -197,7 +208,7 @@ void setSceneThreeObjects() {
   // set spaceship
   float spaceshipWidth = width * 2;
   float spaceshipHeight = width * 2;
-  float spaceshipSpeed = 50;
+  float spaceshipSpeed = 75;
   spaceshipB[0] = new Spaceship(width/2, height/2, spaceshipWidth, spaceshipHeight);
   spaceshipB[1] = new Spaceship(width/2 - 50, height/2 + 50, spaceshipWidth, spaceshipHeight);
   spaceshipB[2] = new Spaceship(width/2 + 50, height/2 + 50, spaceshipWidth, spaceshipHeight);
@@ -216,7 +227,12 @@ void setSceneFourObjects() {
 }
 
 void setSceneFiveObjects() {
-
+  // set spaceship and aliens
+  float spaceshipWidth = 0;
+  float spaceshipHeight = 0;
+  float spaceshipSpeed = 7;
+  spaceshipD = new Spaceship(width/2, height/8, spaceshipWidth, spaceshipHeight);
+  spaceshipD.setSpeed(spaceshipSpeed);
 
 }
 

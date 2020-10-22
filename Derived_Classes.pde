@@ -18,6 +18,16 @@ class Spaceship extends MyObject {
     super.setImage(objImage);
   }
   
+  void scaleUp() {
+    if (h < height || w < width ) {
+        super.scaleUp();
+    } else {
+      fill(255);
+      rectMode(CENTER);
+      rect(width/2, height/2, 100, 100);
+    }
+  }
+  
 
 }
 
