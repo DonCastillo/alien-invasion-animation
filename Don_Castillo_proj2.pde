@@ -10,12 +10,13 @@
 ************************/
 
 PFont font;
-PImage spaceImg;
-PImage rocketImg, yellowCarImg, brownCarImg, asteroid1Img, asteroid2Img;
+PImage spaceImg, rocketImg, yellowCarImg, brownCarImg, asteroid1Img, asteroid2Img, earthImg;
 Asteroid[] asteroidTop = new Asteroid[2];
 Asteroid[] asteroidDiagonal = new Asteroid[1];
-Spaceship[] spaceship = new Spaceship[5];
-MyObject rocket;
+Spaceship[] spaceshipA = new Spaceship[5];
+Spaceship[] spaceshipB = new Spaceship[5];
+MyObject rocket, earth;
+int startTime;
 
 
 
@@ -36,15 +37,39 @@ void setup() {
   brownCarImg = loadImage("brown-car.png");
   asteroid1Img = loadImage("asteroid-1.png");
   asteroid2Img = loadImage("asteroid-2.png");
+  earthImg = loadImage("earth.png");
   
   // set scene objects
   setSceneTwoObjects();
+  setSceneThreeObjects();
+  setSceneFourObjects();
+  setSceneFiveObjects();
+  setSceneSixObjects();
+  setSceneSevenObjects();
+  
+  startTime = millis();
 }
 
 
 
 void draw() {
-  sceneTwo();
+  int m = millis() - startTime;
+  if(m >= 0 && m < 5000) {
+    sceneOne();
+  }
+  else if(m >= 5000 && m < 15000) {
+    sceneTwo();
+  }
+  else if(m >= 15000 && m < 25000) {
+    sceneThree();
+  } 
+  else {
+    startTime = millis();
+    setup();
+  }
+
+  println((float)(millis()/1000));
+
 }
 
 
@@ -76,9 +101,9 @@ void sceneTwo() {
   }
   
   // display spaceships
-  for(int i = 0; i < spaceship.length; ++i) {
-    spaceship[i].display();
-    spaceship[i].forward();
+  for(int i = 0; i < spaceshipA.length; ++i) {
+    spaceshipA[i].display();
+    spaceshipA[i].forward();
   }
   
   rocket.display();
@@ -87,7 +112,19 @@ void sceneTwo() {
 }
 
 void sceneThree() {
-
+  // display background
+  setBackground(spaceImg, color(201, 201, 201, 255));
+  
+  // display earth
+  earth.display();
+  
+  // display spaceship
+  for(int i = 0; i < spaceshipB.length; ++i) {
+    spaceshipB[i].display();
+    spaceshipB[i].scaleDown();
+  }
+  
+  
 }
 
 void sceneFour() {
@@ -130,16 +167,16 @@ void setSceneTwoObjects() {
   float spaceshipWidth = 200;
   float spaceshipHeight = 200;
   float spaceshipSpeed = 7;
-  spaceship[0] = new Spaceship(-2, height/2, spaceshipWidth, spaceshipHeight);
-  spaceship[1] = new Spaceship(-50, (height/2) - 70, spaceshipWidth, spaceshipHeight);
-  spaceship[2] = new Spaceship(-50, (height/2) + 70 , spaceshipWidth, spaceshipHeight);
-  spaceship[3] = new Spaceship(-100, (height/2) - 140 , spaceshipWidth, spaceshipHeight);
-  spaceship[4] = new Spaceship(-100, (height/2) + 140 , spaceshipWidth, spaceshipHeight);
-  spaceship[0].setSpeed(spaceshipSpeed);
-  spaceship[1].setSpeed(spaceshipSpeed);
-  spaceship[2].setSpeed(spaceshipSpeed);
-  spaceship[3].setSpeed(spaceshipSpeed);
-  spaceship[4].setSpeed(spaceshipSpeed);
+  spaceshipA[0] = new Spaceship(-2, height/2, spaceshipWidth, spaceshipHeight);
+  spaceshipA[1] = new Spaceship(-50, (height/2) - 70, spaceshipWidth, spaceshipHeight);
+  spaceshipA[2] = new Spaceship(-50, (height/2) + 70 , spaceshipWidth, spaceshipHeight);
+  spaceshipA[3] = new Spaceship(-100, (height/2) - 140 , spaceshipWidth, spaceshipHeight);
+  spaceshipA[4] = new Spaceship(-100, (height/2) + 140 , spaceshipWidth, spaceshipHeight);
+  spaceshipA[0].setSpeed(spaceshipSpeed);
+  spaceshipA[1].setSpeed(spaceshipSpeed);
+  spaceshipA[2].setSpeed(spaceshipSpeed);
+  spaceshipA[3].setSpeed(spaceshipSpeed);
+  spaceshipA[4].setSpeed(spaceshipSpeed);
   
   // set rocket
   float rocketWidth = 200;
@@ -151,7 +188,48 @@ void setSceneTwoObjects() {
 }
 
 
+void setSceneThreeObjects() {
+  
+  // set earth
+  earth = new MyObject(width/2, height/2, 800, 600);
+  earth.setImage(earthImg);
+  
+  // set spaceship
+  float spaceshipWidth = width * 2;
+  float spaceshipHeight = width * 2;
+  float spaceshipSpeed = 50;
+  spaceshipB[0] = new Spaceship(width/2, height/2, spaceshipWidth, spaceshipHeight);
+  spaceshipB[1] = new Spaceship(width/2 - 50, height/2 + 50, spaceshipWidth, spaceshipHeight);
+  spaceshipB[2] = new Spaceship(width/2 + 50, height/2 + 50, spaceshipWidth, spaceshipHeight);
+  spaceshipB[3] = new Spaceship(width/2 - 100, height/2 + 100, spaceshipWidth, spaceshipHeight);
+  spaceshipB[4] = new Spaceship(width/2 + 100, height/2 + 100, spaceshipWidth, spaceshipHeight);
+  spaceshipB[0].setSpeed(spaceshipSpeed);
+  spaceshipB[1].setSpeed(spaceshipSpeed);
+  spaceshipB[2].setSpeed(spaceshipSpeed);
+  spaceshipB[3].setSpeed(spaceshipSpeed);
+  spaceshipB[4].setSpeed(spaceshipSpeed);
+  
+}
 
+void setSceneFourObjects() {
+
+}
+
+void setSceneFiveObjects() {
+
+
+}
+
+void setSceneSixObjects() {
+
+
+
+}
+
+void setSceneSevenObjects() {
+
+
+}
 
 
 
