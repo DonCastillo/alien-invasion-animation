@@ -33,9 +33,11 @@ class MyObject {
   }
   
   void display() {
+    pushMatrix();
     translate(x, y);
     imageMode(CENTER);
     image(image, 0, 0, w, h);
+    popMatrix();
   }
   
   void forward() {

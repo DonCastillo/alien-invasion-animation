@@ -14,7 +14,7 @@ PImage space;
 PImage rocket, yellowCar, brownCar, asteroid1, asteroid2;
 Asteroid[] asteroidTop = new Asteroid[2];
 Asteroid[] asteroidDiagonal = new Asteroid[1];
-Spaceship[] spaceship = new Spaceship[3];
+Spaceship[] spaceship = new Spaceship[5];
 
 
 
@@ -75,7 +75,6 @@ void sceneTwo() {
   }
   
   // display spaceships
-  
   for(int i = 0; i < spaceship.length; ++i) {
     spaceship[i].display();
     spaceship[i].forward();
@@ -124,19 +123,19 @@ void setSceneTwoObjects() {
   }
   
   // set spaceship
-  float spaceshipWidth = 250;
-  float spaceshipHeight = 250;
+  float spaceshipWidth = 200;
+  float spaceshipHeight = 200;
   float spaceshipSpeed = 7;
   spaceship[0] = new Spaceship(-2, height/2, spaceshipWidth, spaceshipHeight);
-  spaceship[1] = new Spaceship(-4, (height/2) - 2 , spaceshipWidth, spaceshipHeight);
-  spaceship[2] = new Spaceship(-4, (height/2) + 2 , spaceshipWidth, spaceshipHeight);
-  //spaceship[3] = new Spaceship(-8, (height/2) - 4 , spaceshipWidth, spaceshipHeight);
-  //spaceship[4] = new Spaceship(-8, (height/2) + 4 , spaceshipWidth, spaceshipHeight);
+  spaceship[1] = new Spaceship(-50, (height/2) - 70, spaceshipWidth, spaceshipHeight);
+  spaceship[2] = new Spaceship(-50, (height/2) + 70 , spaceshipWidth, spaceshipHeight);
+  spaceship[3] = new Spaceship(-100, (height/2) - 140 , spaceshipWidth, spaceshipHeight);
+  spaceship[4] = new Spaceship(-100, (height/2) + 140 , spaceshipWidth, spaceshipHeight);
   spaceship[0].setSpeed(spaceshipSpeed);
   spaceship[1].setSpeed(spaceshipSpeed);
   spaceship[2].setSpeed(spaceshipSpeed);
-  //spaceship[3].setSpeed(spaceshipSpeed);
-  //spaceship[4].setSpeed(spaceshipSpeed);
+  spaceship[3].setSpeed(spaceshipSpeed);
+  spaceship[4].setSpeed(spaceshipSpeed);
 }
 
 
