@@ -12,7 +12,8 @@
 PFont font;
 PImage space;
 PImage rocket, yellowCar, brownCar, asteroid1, asteroid2;
-Asteroid asteroidA, asteroidB; 
+Asteroid[] asteroidTop = new Asteroid[3];
+Asteroid[] asteroidBottom = new Asteroid[2];
 
 
 
@@ -34,16 +35,14 @@ void setup() {
   asteroid1 = loadImage("asteroid-1.png");
   asteroid2 = loadImage("asteroid-2.png");
   
-  // set all objects
-  asteroidA = new Asteroid(width/2, height/2, 350, 350);
-  asteroidA.setImage(asteroid1);
-  
+  // set scene objects
+  setSceneOneObjects();
 }
 
 
 
 void draw() {
-  scene2();
+  sceneTwo();
 }
 
 
@@ -53,36 +52,77 @@ void draw() {
 @desc: Scene 1
        displays the title of the animation
 ************************/
-void scene1() {
+void sceneOne() {
   setBackground(space, color(201, 201, 201, 255));        // displays space image as background
   setTitle("The Invasion");                               // displays title
 }
 
-void scene2() {
-  setBackground(space, color(201, 201, 201, 255));        // displays space image as background
-  asteroidA.rotateClockwise("backward");
-  asteroidA.setSpeed(10);
+void sceneTwo() {
+  // display background
+  setBackground(space, color(201, 201, 201, 255));
+  
+  // display top asteroids
+  for(int i = 0; i < asteroidTop.length; ++i) {
+    asteroidTop[i].backward();
+    asteroidTop[i].rotateClockwise();
+  }
+  
+  // display bottom asteroids
+  for(int i = 0; i < asteroidBottom.length; ++i) {
+    asteroidBottom[i].forward();
+    asteroidBottom[i].rotateClockwise();
+  }
+  
+  
 }
 
-void scene3() {
+void sceneThree() {
 
 }
 
-void scene4() {
+void sceneFour() {
 
 }
 
-void scene5() {
+void sceneFive() {
 
 }
 
-void scene6() {
+void sceneSix() {
 
 }
 
-void scene7() {
+void sceneSeven() {
 
 }
+
+
+void setSceneOneObjects() {
+  // set top asteroids
+   for(int i = 0; i < asteroidTop.length; ++i) {
+    float dimension = random(50, 350);
+    float speed = random(2, 10);
+    asteroidTop[i] = new Asteroid(width + 2, random(0, height), dimension, dimension);
+    asteroidTop[i].setImage(asteroid1);
+    asteroidTop[i].setSpeed(speed);
+  }
+  
+  // set bottom asteroids
+  for(int i = 0; i < asteroidBottom.length; ++i) {
+    float dimension = random(50, 150);
+    float speed = random(2, 10);
+    asteroidBottom[i] = new Asteroid(-2, random(0, height), dimension, dimension);
+    asteroidBottom[i].setImage(asteroid2);
+    asteroidBottom[i].setSpeed(speed);
+  }
+}
+
+
+
+
+
+
+
 
 /***********************
 @desc: sets the scenes title in the center
