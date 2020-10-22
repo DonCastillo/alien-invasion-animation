@@ -12,7 +12,7 @@
 PFont font;
 PImage space;
 
-void setup(){
+void setup() {
   size(1000, 600);                       // width and height of the window
   background(0);                         // default background
   font = loadFont("Consolas-48.vlw");    // load font
@@ -20,8 +20,8 @@ void setup(){
   
 }
 
-void draw(){
-  scene1();
+void draw() {
+  scene2();
 
 }
 
@@ -31,30 +31,30 @@ void draw(){
 ************************/
 void scene1() {
   setBackground(space, color(201, 201, 201, 255));        // displays space image as background
-  setTitle("The Invasion");                              // displays title
+  setTitle("The Invasion");                               // displays title
 }
 
-void scene2(){
-
+void scene2() {
+  setBackground(space, color(201, 201, 201, 255));        // displays space image as background
 }
 
-void scene3(){
-
-}
-
-void scene4(){
+void scene3() {
 
 }
 
-void scene5(){
+void scene4() {
 
 }
 
-void scene6(){
+void scene5() {
 
 }
 
-void scene7(){
+void scene6() {
+
+}
+
+void scene7() {
 
 }
 
@@ -62,7 +62,7 @@ void scene7(){
 @desc: sets the scenes title in the center
 @params:  text to be displayed
 ************************/
-void setTitle(String title){
+void setTitle(String title) {
   textFont(font, 48);
   textAlign(CENTER, CENTER);
   fill(250);
@@ -74,18 +74,23 @@ void setTitle(String title){
 @desc: sets the scenes background image
 @params:  image to be displayed
 ************************/
-void setBackground(PImage pImage, color pColor){
+void setBackground(PImage pImage, color pColor) {
   tint(pColor);
   imageMode(CENTER);
   image(pImage, width/2, height/2, width, height); 
 }
 
-
-/***********************
-@desc: Classes
-************************/
-class Spaceship {
   
-
-}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
