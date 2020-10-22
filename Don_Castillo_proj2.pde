@@ -10,11 +10,12 @@
 ************************/
 
 PFont font;
-PImage space;
-PImage rocket, yellowCar, brownCar, asteroid1, asteroid2;
+PImage spaceImg;
+PImage rocketImg, yellowCarImg, brownCarImg, asteroid1Img, asteroid2Img;
 Asteroid[] asteroidTop = new Asteroid[2];
 Asteroid[] asteroidDiagonal = new Asteroid[1];
 Spaceship[] spaceship = new Spaceship[5];
+MyObject rocket;
 
 
 
@@ -29,12 +30,12 @@ void setup() {
   font = loadFont("Consolas-48.vlw");  
   
   // load all images
-  space = loadImage("space.jpg");        
-  rocket = loadImage("rocket.png");
-  yellowCar = loadImage("yellow-car.png");
-  brownCar = loadImage("brown-car.png");
-  asteroid1 = loadImage("asteroid-1.png");
-  asteroid2 = loadImage("asteroid-2.png");
+  spaceImg = loadImage("space.jpg");        
+  rocketImg = loadImage("rocket.png");
+  yellowCarImg = loadImage("yellow-car.png");
+  brownCarImg = loadImage("brown-car.png");
+  asteroid1Img = loadImage("asteroid-1.png");
+  asteroid2Img = loadImage("asteroid-2.png");
   
   // set scene objects
   setSceneTwoObjects();
@@ -54,13 +55,13 @@ void draw() {
        displays the title of the animation
 ************************/
 void sceneOne() {
-  setBackground(space, color(201, 201, 201, 255));        // displays space image as background
+  setBackground(spaceImg, color(201, 201, 201, 255));        // displays space image as background
   setTitle("The Invasion");                               // displays title
 }
 
 void sceneTwo() {
   // display background
-  setBackground(space, color(201, 201, 201, 255));
+  setBackground(spaceImg, color(201, 201, 201, 255));
   
   // display top asteroids
   for(int i = 0; i < asteroidTop.length; ++i) {
@@ -79,6 +80,9 @@ void sceneTwo() {
     spaceship[i].display();
     spaceship[i].forward();
   }
+  
+  rocket.display();
+  rocket.toTopLeft();
   
 }
 
@@ -109,7 +113,7 @@ void setSceneTwoObjects() {
     float dimension = random(50, 300);
     float speed = random(2, 10);
     asteroidTop[i] = new Asteroid(width + 2, random(height/2, height), dimension, dimension);
-    asteroidTop[i].setImage(asteroid1);
+    asteroidTop[i].setImage(asteroid1Img);
     asteroidTop[i].setSpeed(speed);
   }
   
@@ -118,7 +122,7 @@ void setSceneTwoObjects() {
     float dimension = random(50, 150);
     float speed = random(2, 5);
     asteroidDiagonal[i] = new Asteroid(-2, -2, dimension, dimension);
-    asteroidDiagonal[i].setImage(asteroid2);
+    asteroidDiagonal[i].setImage(asteroid2Img);
     asteroidDiagonal[i].setSpeed(speed);
   }
   
@@ -136,6 +140,14 @@ void setSceneTwoObjects() {
   spaceship[2].setSpeed(spaceshipSpeed);
   spaceship[3].setSpeed(spaceshipSpeed);
   spaceship[4].setSpeed(spaceshipSpeed);
+  
+  // set rocket
+  float rocketWidth = 200;
+  float rocketHeight = 200;
+  float rocketSpeed = 15;
+  rocket = new MyObject(width + 5, height + 5, rocketWidth, rocketHeight);
+  rocket.setImage(rocketImg);
+  rocket.setSpeed(rocketSpeed);
 }
 
 
