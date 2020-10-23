@@ -100,5 +100,6 @@ class MyObject {
   float getWidth() {
     return w;
   }
+  
  
 }

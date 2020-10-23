@@ -168,18 +168,9 @@ void sceneFive() {
   
   // display background
   setBackground(fieldImg, color(200, 200, 200, 255));
- 
-   // display aliens
-  //for(int i = 0; i < alienA.length; ++i) {
-  //  alienA[0].display();
-  //}
   
   // display aliens if spaceship has illuminated
-  if(spaceshipD.isIlluminated()) {
-    //if((sceneFiveTime % 5) == 0) {
-    //    alienA[0].display();
-    //    alienA[0].descend();
-    //}     
+  if(spaceshipD.isIlluminated()) {   
     for(int i = 0; i < alienA.length; ++i) {
       alienA[i].display();
       alienA[i].descend();
@@ -189,18 +180,15 @@ void sceneFive() {
         } else {
            alienA[i].backward(sceneFiveTime);
         }
-
       }
     }
-
-  
   }
  
   // display spaceship
   spaceshipD.scaleUp();
   spaceshipD.display();
   
-  println(sceneFiveTime);
+  //println(sceneFiveTime);
 
 }
 

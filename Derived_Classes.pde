@@ -8,6 +8,7 @@ class Alien extends MyObject {
   PImage backward2 = loadImage("alien-left-2.png");
   PImage currentLook;
   boolean landed = false;
+  float yLAND = (height - (h/2 - 25));
   
   Alien(float pX, float pY, float pW, float pH) {
     super(pX, pY, pW, pH);
@@ -23,7 +24,7 @@ class Alien extends MyObject {
   //}
   
   void descend() {
-    if ((height - (h/2 - 25)) > y) {
+    if (yLAND > y) {
       super.descend();
     } else {
       landed = true;
@@ -32,6 +33,8 @@ class Alien extends MyObject {
   
   void forward(int time) {
     super.forward();
+    super.y = round(random(yLAND, yLAND + 10));
+    println(super.x);
     if (time % 3 == 0) {
       super.setImage(forward0);
     } else if(time % 3 == 1) {
@@ -43,6 +46,7 @@ class Alien extends MyObject {
   
   void backward(int time) {
     super.backward();
+    super.y = round(random(yLAND, yLAND + 10));
     if (time % 3 == 0) {
       super.setImage(backward0);
     } else if(time % 3 == 1) {
