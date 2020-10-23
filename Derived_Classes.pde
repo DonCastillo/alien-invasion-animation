@@ -125,35 +125,5 @@ class Asteroid extends MyObject {
     imageMode(CENTER);
     image(image, 0, 0, w, h);
     popMatrix();
-    
-    //switch(motion) {
-    //  case "forward":
-    //    //super.forward();
-    //    x++;
-    //    break;
-    //  case "backward":
-    //    super.backward();
-    //    break;
-    //  case "toTopRight":
-    //    super.toTopRight();
-    //    break;
-    //  case "toTopLeft":
-    //    super.toTopLeft();
-    //    break;
-    //  case "toBottomRight":
-    //    super.toBottomRight();
-    //    break;
-    //  case "toBottomLeft":
-    //    super.toBottomLeft();
-    //    break;
-    //  case "ascend":
-    //    super.ascend();
-    //    break;
-    //  case "descend":
-    //    super.descend();
-    //    break;
-    //  default:
-    //    break;
-    //}
   }
 }
