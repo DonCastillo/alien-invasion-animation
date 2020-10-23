@@ -7,23 +7,26 @@ class Alien extends MyObject {
   PImage backward1 = loadImage("alien-left-1.png");
   PImage backward2 = loadImage("alien-left-2.png");
   PImage currentLook;
-
+  boolean landed = false;
   
   Alien(float pX, float pY, float pW, float pH) {
     super(pX, pY, pW, pH);
     super.setImage(front);
   }
   
+  boolean hasLanded() {
+    return landed;
+  }
+  
   //void display() {
-  //  color
   //  super.display();
   //}
   
-  //void descend() {
-  //  //pushMatrix();
-    
-  //  //popMatrix();
-  //}
+  void descend() {
+    if ((height - (h/2 - 25)) > y) {
+      super.descend();
+    }
+  }
   
     //  pushMatrix();
     //translate(x, y);
