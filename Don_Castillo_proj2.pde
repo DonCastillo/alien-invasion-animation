@@ -18,6 +18,7 @@ Spaceship spaceshipD;
 MyObject rocket, earth;
 int time;
 int sceneFiveTime;
+int numOfAliens;
 
 
 
@@ -26,7 +27,7 @@ void setup() {
   size(1000, 600);                  
   
   // set default background
-  background(0);       
+  //background(0);       
   
   // load text font
   font = loadFont("Consolas-48.vlw");  
@@ -48,7 +49,8 @@ void setup() {
   //setSceneSevenObjects();
   
   time = millis();
-  frameRate(30);
+  frameRate(45);
+  //noLoop();
 }
 
 
@@ -82,7 +84,7 @@ void draw() {
     //time = millis();
     setup();
     //sceneOne();
-    time = 0;
+    time = millis();
   }
 
   //println(m);
@@ -90,7 +92,9 @@ void draw() {
 
 }
 
-
+void mousePressed(){
+  //redraw();
+}
 
 
 /***********************
@@ -180,7 +184,12 @@ void sceneFive() {
       alienA[i].display();
       alienA[i].descend();
       if(alienA[i].hasLanded()) {
-        alienA[i].forward(sceneFiveTime);
+        if(i % 2 == 0) {
+           alienA[i].forward(sceneFiveTime);
+        } else {
+           alienA[i].backward(sceneFiveTime);
+        }
+
       }
     }
 
@@ -278,7 +287,7 @@ void setSceneFiveObjects() {
     alienA[i].setSpeed(alienSpeed);
   }
   
-  int numOfAliens = alienA.length;
+  numOfAliens = alienA.length;
 
 }
 

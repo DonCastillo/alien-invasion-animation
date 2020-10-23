@@ -41,6 +41,17 @@ class Alien extends MyObject {
     }
   }
   
+  void backward(int time) {
+    super.backward();
+    if (time % 3 == 0) {
+      super.setImage(backward0);
+    } else if(time % 3 == 1) {
+      super.setImage(backward1);
+    } else {
+      super.setImage(backward2);
+    }
+  }
+  
     //  pushMatrix();
     //translate(x, y);
     //imageMode(CENTER);
