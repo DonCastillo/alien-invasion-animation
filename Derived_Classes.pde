@@ -1,11 +1,35 @@
 class Alien extends MyObject {
-  PImage objImage = loadImage("spaceship.png");   
+  PImage front = loadImage("alien-front.png");
+  PImage forward0 = loadImage("alien-right-0.png");
+  PImage forward1 = loadImage("alien-right-1.png");
+  PImage forward2 = loadImage("alien-right-2.png");
+  PImage backward0 = loadImage("alien-left-0.png");
+  PImage backward1 = loadImage("alien-left-1.png");
+  PImage backward2 = loadImage("alien-left-2.png");
+  PImage currentLook;
 
   
   Alien(float pX, float pY, float pW, float pH) {
     super(pX, pY, pW, pH);
-    super.setImage(objImage);
+    super.setImage(front);
   }
+  
+  //void display() {
+  //  color
+  //  super.display();
+  //}
+  
+  //void descend() {
+  //  //pushMatrix();
+    
+  //  //popMatrix();
+  //}
+  
+    //  pushMatrix();
+    //translate(x, y);
+    //imageMode(CENTER);
+    //image(image, 0, 0, w, h);
+    //popMatrix();
   
   // forward
   // backward
@@ -17,10 +41,15 @@ class Spaceship extends MyObject {
   PImage objImage = loadImage("spaceship.png"); 
   float lightHeight = 0;
   //float lightWidth = w;
+  boolean illuminated = false;
   
   Spaceship(float pX, float pY, float pW, float pH) {
     super(pX, pY, pW, pH);
     super.setImage(objImage);
+  }
+  
+  boolean isIlluminated(){
+    return illuminated;
   }
   
   void scaleUp() {
@@ -33,21 +62,31 @@ class Spaceship extends MyObject {
   
   void illuminate() {
     pushMatrix();
-    lightHeight = lightHeight + 30;
     translate(x, y);
     fill(255,243,205, 120);
-    //noFill();
     noStroke();
     rectMode(CORNERS);
+    if (lightHeight < height) {
+      lightHeight = lightHeight + 30;  
+    } else {
+      illuminated = true;
+    }
     rect(-(w/8), 0, (w/8), lightHeight);
-    //for (int i = y; i <= y + h; i++) {
-    //  float inter = map(i, y, y+h, 0, 1);
-    //  color c = lerpColor(c1, c2, inter);
-    //  stroke(c);
-    //  line(x, i, x+w, i);
-    //}
-    //println(lightWidth + " " + lightHeight);
-    println("width; " + w + " " + "height: " + h);
+    //println(lightHeight);
+    popMatrix();
+  }
+  
+  void deluminate() {
+    pushMatrix();
+    translate(x, y);
+    fill(255,243,205, 120);
+    noStroke();
+    rectMode(CORNERS);
+    if (lightHeight > y) {
+      lightHeight = lightHeight - 30;  
+    }
+    rect(-(w/8), 0, (w/8), lightHeight);
+    //println(lightHeight);
     popMatrix();
   }
   

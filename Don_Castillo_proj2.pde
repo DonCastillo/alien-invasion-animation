@@ -15,9 +15,11 @@ Asteroid[] asteroidTop = new Asteroid[2];
 Asteroid[] asteroidDiagonal = new Asteroid[1];
 Spaceship[] spaceshipA = new Spaceship[5];
 Spaceship[] spaceshipB = new Spaceship[5];
+Alien[] alienA = new Alien[10];
 Spaceship spaceshipD;
 MyObject rocket, earth;
-int startTime;
+int time;
+int sceneFiveTime;
 
 
 
@@ -49,14 +51,14 @@ void setup() {
   setSceneSixObjects();
   setSceneSevenObjects();
   
-  startTime = millis();
-  frameRate(100);
+  time = millis();
+  //frameRate(100);
 }
 
 
 
 void draw() {
-  //int m = millis() - startTime;
+  int m = millis() - time;
   //if(m >= 0 && m < 5000) {
   //  sceneOne();
   //}
@@ -71,7 +73,7 @@ void draw() {
   //  setup();
   //}
 
-  //println((float)(millis()/1000));
+  //println(m);
   sceneFive();
 
 }
@@ -88,6 +90,11 @@ void sceneOne() {
   setTitle("The Invasion");                               // displays title
 }
 
+
+/***********************
+@desc: Scene 2
+       displays the title of the animation
+************************/
 void sceneTwo() {
   // display background
   setBackground(spaceImg, color(201, 201, 201, 255));
@@ -115,6 +122,10 @@ void sceneTwo() {
   
 }
 
+/***********************
+@desc: Scene 3
+       displays the title of the animation
+************************/
 void sceneThree() {
   // display background
   setBackground(spaceImg, color(201, 201, 201, 255));
@@ -131,26 +142,68 @@ void sceneThree() {
   
 }
 
+
+/***********************
+@desc: Scene 4
+       displays the title of the animation
+************************/
 void sceneFour() {
 
 }
 
+
+/***********************
+@desc: Scene 5
+       displays the title of the animation
+************************/
 void sceneFive() {
+  sceneFiveTime++;
+  
+  
   // display background
   setBackground(fieldImg, color(200, 200, 200, 255));
  
-  // displa spaceship
+   // display aliens
+  //for(int i = 0; i < alienA.length; ++i) {
+  //  alienA[0].display();
+  //}
+  
+  // display aliens if spaceship has illuminated
+  if(spaceshipD.isIlluminated()) {
+    //if((sceneFiveTime % 5) == 0) {
+    //    alienA[0].display();
+    //    alienA[0].descend();
+    //}     
+    for(int i = 0; i < alienA.length; ++i) {
+      alienA[i].display();
+      alienA[i].descend();
+    }
+
+  
+  }
+ 
+  // display spaceship
   spaceshipD.scaleUp();
   spaceshipD.display();
+  
+  println(sceneFiveTime);
 
-  
-  
 }
 
+
+/***********************
+@desc: Scene 6
+       displays the title of the animation
+************************/
 void sceneSix() {
 
 }
 
+
+/***********************
+@desc: Scene 7
+       displays the title of the animation
+************************/
 void sceneSeven() {
 
 }
@@ -228,12 +281,27 @@ void setSceneFourObjects() {
 }
 
 void setSceneFiveObjects() {
+  sceneFiveTime = 0;
   // set spaceship and aliens
   float spaceshipWidth = 0;
   float spaceshipHeight = 0;
   float spaceshipSpeed = 7;
-  spaceshipD = new Spaceship(width/2, height/8, spaceshipWidth, spaceshipHeight);
+  float xPos = width/2;
+  float yPos = height/8;
+  spaceshipD = new Spaceship(xPos, yPos, spaceshipWidth, spaceshipHeight);
   spaceshipD.setSpeed(spaceshipSpeed);
+  
+  // set aliens
+  float alienWidth = 300;
+  float alienHeight = 250;
+  float alienSpeed = 10;
+  float landingPos = height - (alienHeight/2 - 25);
+  for(int i = 0; i < alienA.length; ++i) {
+    alienA[i] = new Alien(xPos, yPos - 200 * i, alienWidth, alienHeight);
+    alienA[i].setSpeed(alienSpeed);
+  }
+  
+  int numOfAliens = alienA.length;
 
 }
 
