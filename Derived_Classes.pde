@@ -102,7 +102,7 @@ class Spaceship extends MyObject {
     } else {
       illuminated = true;
     }
-    rect(-(w/8), 0, (w/8), lightHeight);
+    rect(-(w/10), 0, (w/10), lightHeight);
     //println(lightHeight);
     popMatrix();
   }
