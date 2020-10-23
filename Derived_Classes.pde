@@ -25,6 +25,19 @@ class Alien extends MyObject {
   void descend() {
     if ((height - (h/2 - 25)) > y) {
       super.descend();
+    } else {
+      landed = true;
+    }
+  }
+  
+  void forward(int time) {
+    super.forward();
+    if (time % 3 == 0) {
+      super.setImage(forward0);
+    } else if(time % 3 == 1) {
+      super.setImage(forward1);
+    } else {
+      super.setImage(forward2);
     }
   }
   

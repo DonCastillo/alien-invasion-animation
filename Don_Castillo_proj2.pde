@@ -177,6 +177,9 @@ void sceneFive() {
     for(int i = 0; i < alienA.length; ++i) {
       alienA[i].display();
       alienA[i].descend();
+      if(alienA[i].hasLanded()) {
+        alienA[i].forward(sceneFiveTime);
+      }
     }
 
   
