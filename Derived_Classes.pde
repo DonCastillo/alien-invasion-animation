@@ -1,5 +1,7 @@
 class Alien extends MyObject {
-  PImage objImage = loadImage("spaceship.png");       
+  PImage objImage = loadImage("spaceship.png");   
+
+  
   Alien(float pX, float pY, float pW, float pH) {
     super(pX, pY, pW, pH);
     super.setImage(objImage);
@@ -12,7 +14,10 @@ class Alien extends MyObject {
 }
 
 class Spaceship extends MyObject {
-  PImage objImage = loadImage("spaceship.png");       
+  PImage objImage = loadImage("spaceship.png"); 
+  float lightHeight = 0;
+  //float lightWidth = w;
+  
   Spaceship(float pX, float pY, float pW, float pH) {
     super(pX, pY, pW, pH);
     super.setImage(objImage);
@@ -22,10 +27,28 @@ class Spaceship extends MyObject {
     if (h < height || w < width ) {
         super.scaleUp();
     } else {
-      fill(255);
-      rectMode(CENTER);
-      rect(width/2, height/2, 100, 100);
+      illuminate();
     }
+  }
+  
+  void illuminate() {
+    pushMatrix();
+    lightHeight = lightHeight + 30;
+    translate(x, y);
+    fill(255,243,205, 120);
+    //noFill();
+    noStroke();
+    rectMode(CORNERS);
+    rect(-(w/8), 0, (w/8), lightHeight);
+    //for (int i = y; i <= y + h; i++) {
+    //  float inter = map(i, y, y+h, 0, 1);
+    //  color c = lerpColor(c1, c2, inter);
+    //  stroke(c);
+    //  line(x, i, x+w, i);
+    //}
+    //println(lightWidth + " " + lightHeight);
+    println("width; " + w + " " + "height: " + h);
+    popMatrix();
   }
   
 
@@ -79,35 +102,3 @@ class Asteroid extends MyObject {
     //}
   }
 }
-
-//class Asteroid2 extends MyObject {
-//  PImage objImage = loadImage("asteroid-2.png");
-//  Asteroid2(float pX, float pY, float pW, float pH) {
-//    super(pX, pY, pW, pH);
-//    super.setImage(objImage);
-//  }
-//}
-
-//class Rocket extends MyObject {
-//  PImage objImage = loadImage("rocket.png");
-//  Rocket(float pX, float pY, float pW, float pH) {
-//    super(pX, pY, pW, pH);
-//    super.setImage(objImage);
-//  }
-//}
-
-//class YellowCar extends MyObject {
-//  PImage objImage = loadImage("yellow-car.png");
-//  YellowCar(float pX, float pY, float pW, float pH) {
-//    super(pX, pY, pW, pH);
-//    super.setImage(objImage);
-//  }
-//}
-
-//class BrownCar extends MyObject {
-//  PImage objImage = loadImage("brown-car.png");
-//  BrownCar(float pX, float pY, float pW, float pH) {
-//    super(pX, pY, pW, pH);
-//    super.setImage(objImage);
-//  }
-//}

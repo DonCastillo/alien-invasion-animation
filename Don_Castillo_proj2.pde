@@ -140,8 +140,9 @@ void sceneFive() {
   setBackground(fieldImg, color(200, 200, 200, 255));
  
   // displa spaceship
-  spaceshipD.display();
   spaceshipD.scaleUp();
+  spaceshipD.display();
+
   
   
 }

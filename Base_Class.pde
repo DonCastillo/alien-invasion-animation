@@ -96,5 +96,9 @@ class MyObject {
     descend();
     forward();
   }
+  
+  float getWidth() {
+    return w;
+  }
  
 }
