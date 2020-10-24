@@ -19,7 +19,7 @@ MyObject rocket, earth;
 int time;
 int sceneFiveTime, sceneFourTime, sceneSixTime;
 int numOfAliens;
-
+boolean isLastScene;
 
 
 void setup() {
@@ -50,11 +50,11 @@ void setup() {
   setSceneFourObjects();
   setSceneFiveObjects();
   setSceneSixObjects();
-  //setSceneSevenObjects();
+  setSceneSevenObjects();
 
   time = millis();
   frameRate(60);
-  //noLoop();
+  isLastScene = false;
 }
 
 
@@ -62,42 +62,44 @@ void setup() {
 void draw() {
   int m = millis() - time;
   
-  //if(m >= 0 && m < 2000) {
-  //  sceneOne();
-  //}
-  //else if(m >= 2000 && m < 7000) {
-  //  sceneTwo();
-  //}
-  //else if(m >= 7000 && m < 10000) {
-  //  sceneThree();
-  //} 
-  //else if(m >= 10000 && m < 19000){
-  //  sceneFour();
-  //}
-  //else if(m >= 19000 && m < 36000){
-  //  sceneFive();
-  //}
-  //else {
-  //  m = millis();
-  //  setup();
-  //}
-
-
-
-  //sceneOne();  // 2 sec
-  //sceneTwo(); // 6 sec
-  //sceneThree();  // 4 sec
-  //sceneFour(); // 16 sec
-  //sceneFive(); // 25 sec
-
-  //println(m);
-  //sceneTwo();
-  sceneSix();
+  if(m >= 0 && m < 2000) {
+    sceneOne();
+  }
+  else if(m >= 2000 && m < 8000) {
+    sceneTwo();
+  }
+  else if(m >= 8000 && m < 11000) {
+    sceneThree();
+  } 
+  else if(m >= 11000 && m < 20000){
+    sceneFour();
+  }
+  else if(m >= 20000 && m < 37000){
+    sceneFive();
+  }
+  else if(m >= 37000 && m < 46000){
+    sceneSix();
+  } 
+  else{
+    sceneSeven();
+    m = millis();
+    isLastScene = true;
+  }
 }
 
 void mousePressed() {
-  //redraw();
-  println(mouseX, mouseY);
+
+}
+
+void keyPressed() {
+  switch(key) {
+    case ' ':
+      if(isLastScene){
+        setup();
+      }
+      break;
+      
+  }
 }
 
 
@@ -220,19 +222,22 @@ void sceneSix() {
   
   if(alienB.x < 678){
     alienB.forward(sceneSixTime);
+    fill(0, 0, 0, 255);
+  } else {
+    fill(235, 204, 80, 255);
+  
   }
 
-  
-  pushMatrix();
-  fill(235, 204, 80, 255);
   rectMode(CORNERS);
   rect(478, 447, 868, 523);
+  rectMode(CORNER);
+  
+  pushMatrix();
   noFill();
   imageMode(CORNERS);
   tint(160,160,160,255);
-  image(barnImg, 405, 204, width, height);
+  image(barnImg, 405, 204, width, height + 2);
   popMatrix();
- 
 }
 
 
@@ -241,6 +246,8 @@ void sceneSix() {
  displays the title of the animation
  ************************/
 void sceneSeven() {
+  setBackground(spaceImg, color(201, 201, 201, 255));
+  setTitle("The End");  
 }
 
 
