@@ -14,10 +14,10 @@ PImage spaceImg, rocketImg, yellowCarImg, brownCarImg, asteroid1Img, asteroid2Im
 Asteroid asteroidTop, asteroidDiagonal;
 Spaceship spaceshipA, spaceshipB, spaceshipC, spaceshipD;
 Alien[] alienA;
-//Spaceship spaceshipD;
+Alien alienB;
 MyObject rocket, earth;
 int time;
-int sceneFiveTime, sceneFourTime;
+int sceneFiveTime, sceneFourTime, sceneSixTime;
 int numOfAliens;
 
 
@@ -49,7 +49,7 @@ void setup() {
   setSceneThreeObjects();
   setSceneFourObjects();
   setSceneFiveObjects();
-  //setSceneSixObjects();
+  setSceneSixObjects();
   //setSceneSevenObjects();
 
   time = millis();
@@ -213,13 +213,26 @@ void sceneFive() {
  displays the title of the animation
  ************************/
 void sceneSix() {
+  sceneSixTime++;
   setBackground(farmImg, color(150, 150, 150, 255));
+  
+  alienB.display();
+  
+  if(alienB.x < 678){
+    alienB.forward(sceneSixTime);
+  }
+
+  
   pushMatrix();
+  fill(235, 204, 80, 255);
+  rectMode(CORNERS);
+  rect(478, 447, 868, 523);
+  noFill();
   imageMode(CORNERS);
-  tint(160,160,160,250);
+  tint(160,160,160,255);
   image(barnImg, 405, 204, width, height);
   popMatrix();
-  
+ 
 }
 
 
@@ -301,7 +314,9 @@ void setSceneFiveObjects() {
 }
 
 void setSceneSixObjects() {
-   
+  sceneSixTime = 0;
+  alienB = new Alien(-2, (height - 100), 300, 250);
+  alienB.setSpeed(10);
 }
 
 void setSceneSevenObjects() {

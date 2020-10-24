@@ -34,7 +34,7 @@ class Alien extends MyObject {
   void forward(int time) {
     super.forward();
     super.y = round(random(yLAND, yLAND + 10));
-    println(super.x);
+    //println(super.x);
     if (time % 3 == 0) {
       super.setImage(forward0);
     } else if(time % 3 == 1) {
