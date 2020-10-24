@@ -10,7 +10,7 @@
  ************************/
 
 PFont font;
-PImage spaceImg, rocketImg, yellowCarImg, brownCarImg, asteroid1Img, asteroid2Img, earthImg, fieldImg, skylineImg, nightImg;
+PImage spaceImg, rocketImg, yellowCarImg, brownCarImg, asteroid1Img, asteroid2Img, earthImg, fieldImg, skylineImg, nightImg, farmImg, barnImg;
 Asteroid asteroidTop, asteroidDiagonal;
 Spaceship spaceshipA, spaceshipB, spaceshipC, spaceshipD;
 Alien[] alienA;
@@ -41,6 +41,8 @@ void setup() {
   fieldImg = loadImage("field.jpg");
   skylineImg = loadImage("skyline.png"); 
   nightImg = loadImage("night.jpg");
+  farmImg = loadImage("farm.jpg");
+  barnImg = loadImage("barn.png");
 
   // set scene objects
   setSceneTwoObjects();
@@ -90,10 +92,12 @@ void draw() {
 
   //println(m);
   //sceneTwo();
+  sceneSix();
 }
 
 void mousePressed() {
   //redraw();
+  println(mouseX, mouseY);
 }
 
 
@@ -209,6 +213,13 @@ void sceneFive() {
  displays the title of the animation
  ************************/
 void sceneSix() {
+  setBackground(farmImg, color(150, 150, 150, 255));
+  pushMatrix();
+  imageMode(CORNERS);
+  tint(160,160,160,250);
+  image(barnImg, 405, 204, width, height);
+  popMatrix();
+  
 }
 
 
@@ -290,6 +301,7 @@ void setSceneFiveObjects() {
 }
 
 void setSceneSixObjects() {
+   
 }
 
 void setSceneSevenObjects() {
