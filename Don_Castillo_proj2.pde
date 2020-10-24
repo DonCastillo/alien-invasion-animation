@@ -44,7 +44,7 @@ void setup() {
 
   // set scene objects
   setSceneTwoObjects();
-  //setSceneThreeObjects();
+  setSceneThreeObjects();
   setSceneFourObjects();
   setSceneFiveObjects();
   //setSceneSixObjects();
@@ -59,38 +59,34 @@ void setup() {
 
 void draw() {
   int m = millis() - time;
-  //if(m >= 0 && m < 5000) {
+  
+  //if(m >= 0 && m < 2000) {
   //  sceneOne();
   //}
-  //else if(m >= 5000 && m < 15000) {
+  //else if(m >= 2000 && m < 7000) {
   //  sceneTwo();
   //}
-  //else if(m >= 15000 && m < 25000) {
+  //else if(m >= 7000 && m < 10000) {
   //  sceneThree();
   //} 
-  //else {
-  //  startTime = millis();
-  //  setup();
+  //else if(m >= 10000 && m < 19000){
+  //  sceneFour();
   //}
-
-  //if(m >= 0 && m < 5000) {
-  //  sceneTwo();
-  //}
-  //else if(m >= 5000 && m < 35000) {
+  //else if(m >= 19000 && m < 36000){
   //  sceneFive();
   //}
-  ////else if(m >= 15000 && m < 25000) {
-  ////  sceneThree();
-  ////} 
   //else {
-  //  //time = millis();
+  //  m = millis();
   //  setup();
-  //  //sceneOne();
-  //  time = millis();
   //}
 
 
-  sceneFour();
+
+  //sceneOne();  // 2 sec
+  //sceneTwo(); // 6 sec
+  //sceneThree();  // 4 sec
+  //sceneFour(); // 16 sec
+  //sceneFive(); // 25 sec
 
   //println(m);
   //sceneTwo();
@@ -168,8 +164,6 @@ void sceneFour() {
     spaceshipC.deluminate();
   }
  
-
-
   spaceshipC.display();
   setBackground(skylineImg, color(150, 150, 150, 250));
   //println("x: " + spaceshipC.x + " y: " + spaceshipC.y);
@@ -241,7 +235,7 @@ void setSceneTwoObjects() {
 
   // set spaceship
   spaceshipA = new Spaceship(-2, height/2, 200, 200);
-  spaceshipA.setSpeed(7);
+  spaceshipA.setSpeed(9);
 
 
   // set rocket
@@ -265,7 +259,7 @@ void setSceneThreeObjects() {
 void setSceneFourObjects() {
   sceneFourTime = 0;
   spaceshipC = new Spaceship(-2, height/4, 200, 200);
-  spaceshipC.setSpeed(7);
+  spaceshipC.setSpeed(10);
 }
 
 void setSceneFiveObjects() {
