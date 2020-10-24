@@ -17,7 +17,7 @@ Alien[] alienA;
 //Spaceship spaceshipD;
 MyObject rocket, earth;
 int time;
-int sceneFiveTime;
+int sceneFiveTime, sceneFourTime;
 int numOfAliens;
 
 
@@ -157,12 +157,22 @@ void sceneThree() {
  displays the title of the animation
  ************************/
 void sceneFour() {
+  sceneFourTime++;
   background(0);
   setBackground(nightImg, color(150, 150, 150, 225));
   spaceshipC.forward();
-  spaceshipC.illuminate();
-    spaceshipC.display();
+  
+  if((spaceshipC.x >= 150 && spaceshipC.x <= 250) || (spaceshipC.x >= 450 && spaceshipC.x <= 550) || (spaceshipC.x >= 750 && spaceshipC.x <= 850)) {
+    spaceshipC.illuminate();
+  } else {
+    spaceshipC.deluminate();
+  }
+ 
+
+
+  spaceshipC.display();
   setBackground(skylineImg, color(150, 150, 150, 250));
+  //println("x: " + spaceshipC.x + " y: " + spaceshipC.y);
 }
 
 
@@ -253,6 +263,7 @@ void setSceneThreeObjects() {
 }
 
 void setSceneFourObjects() {
+  sceneFourTime = 0;
   spaceshipC = new Spaceship(-2, height/4, 200, 200);
   spaceshipC.setSpeed(7);
 }

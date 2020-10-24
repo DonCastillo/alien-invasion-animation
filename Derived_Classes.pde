@@ -91,6 +91,7 @@ class Spaceship extends MyObject {
     }
   }
   
+  
   void illuminate() {
     pushMatrix();
     translate(x, y);
@@ -98,12 +99,11 @@ class Spaceship extends MyObject {
     noStroke();
     rectMode(CORNERS);
     if (lightHeight < height) {
-      lightHeight = lightHeight + 30;  
+      lightHeight = lightHeight + 50;  
     } else {
       illuminated = true;
     }
     rect(-(w/10), 0, (w/10), lightHeight);
-    //println(lightHeight);
     popMatrix();
   }
   
@@ -113,11 +113,10 @@ class Spaceship extends MyObject {
     fill(255,243,205, 120);
     noStroke();
     rectMode(CORNERS);
-    if (lightHeight > y) {
-      lightHeight = lightHeight - 30;  
+    if (lightHeight > 0) {
+      lightHeight = lightHeight - 50;  
     }
-    rect(-(w/8), 0, (w/8), lightHeight);
-    //println(lightHeight);
+    rect(-(w/10), 0, (w/10), lightHeight);
     popMatrix();
   }
   
