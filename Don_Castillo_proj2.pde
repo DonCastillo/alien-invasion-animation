@@ -1,13 +1,26 @@
 /***********************
  Don Castillo, NMED 3380 B
  Project 2: Alien Invasion Animation
- Last Modified: 10/21/2020 4PM 
+ Last Modified: 10/24/2020 4PM 
  ************************/
 
 
 /***********************
  @desc: Global Variables
  ************************/
+ 
+import ddf.minim.*;
+Minim minim;
+
+AudioPlayer SPACESHIP_IN_SPACE;
+AudioPlayer TO_THE_EARTH;
+AudioPlayer GLIDE;
+AudioPlayer EXITING;
+AudioPlayer LANDING;
+AudioPlayer FOOTSTEP;
+AudioPlayer DOOR;
+AudioPlayer SCREAM;
+
 
 PFont font;
 PImage spaceImg, rocketImg, yellowCarImg, brownCarImg, asteroid1Img, asteroid2Img, earthImg, fieldImg, skylineImg, nightImg, farmImg, barnImg;
@@ -43,7 +56,18 @@ void setup() {
   nightImg = loadImage("night.jpg");
   farmImg = loadImage("farm.jpg");
   barnImg = loadImage("barn.png");
-
+  
+  // initialize sound effects
+  minim = new Minim(this);
+  SPACESHIP_IN_SPACE = minim.loadFile("spaceshipInSpace.mp3");
+  TO_THE_EARTH = minim.loadFile("toTheEarth.mp3");
+  GLIDE = minim.loadFile("longglide.mp3");
+  EXITING = minim.loadFile("exiting.mp3");
+  LANDING = minim.loadFile("landing.mp3");
+  FOOTSTEP = minim.loadFile("footstep.mp3");
+  DOOR = minim.loadFile("door.mp3");
+  SCREAM = minim.loadFile("scream.mp3");
+  
   // set scene objects
   setSceneTwoObjects();
   setSceneThreeObjects();
@@ -132,6 +156,7 @@ void sceneTwo() {
   // display spaceships
   spaceshipA.display();
   spaceshipA.forward();
+  SPACESHIP_IN_SPACE.play();
 
   rocket.display();
   rocket.toTopLeft();
@@ -142,6 +167,7 @@ void sceneTwo() {
  displays the title of the animation
  ************************/
 void sceneThree() {
+  SPACESHIP_IN_SPACE.close();
   // display background
   setBackground(spaceImg, color(201, 201, 201, 255));
 
@@ -151,6 +177,7 @@ void sceneThree() {
   // display spaceship
   spaceshipB.display();
   spaceshipB.scaleDown();
+  TO_THE_EARTH.play();
 }
 
 
@@ -159,10 +186,13 @@ void sceneThree() {
  displays the title of the animation
  ************************/
 void sceneFour() {
+  TO_THE_EARTH.close();
   sceneFourTime++;
   background(0);
   setBackground(nightImg, color(150, 150, 150, 225));
   spaceshipC.forward();
+  GLIDE.play();
+
   
   if((spaceshipC.x >= 150 && spaceshipC.x <= 250) || (spaceshipC.x >= 450 && spaceshipC.x <= 550) || (spaceshipC.x >= 750 && spaceshipC.x <= 850)) {
     spaceshipC.illuminate();
@@ -173,6 +203,7 @@ void sceneFour() {
   spaceshipC.display();
   setBackground(skylineImg, color(150, 150, 150, 250));
   //println("x: " + spaceshipC.x + " y: " + spaceshipC.y);
+  println(sceneFourTime);
 }
 
 
@@ -181,6 +212,7 @@ void sceneFour() {
  displays the title of the animation
  ************************/
 void sceneFive() {
+  GLIDE.close();
   sceneFiveTime++;
 
 
@@ -205,6 +237,13 @@ void sceneFive() {
   // display spaceship
   spaceshipD.scaleUp();
   spaceshipD.display();
+  
+  if(sceneFiveTime >= 100 && sceneFiveTime <= 150){
+    EXITING.play();
+  } else if(sceneFiveTime > 151 ){
+    EXITING.close();
+    LANDING.play();
+  }
 
   //println(sceneFiveTime);
 }
@@ -215,6 +254,7 @@ void sceneFive() {
  displays the title of the animation
  ************************/
 void sceneSix() {
+  LANDING.close();
   sceneSixTime++;
   setBackground(farmImg, color(150, 150, 150, 255));
   
@@ -238,6 +278,8 @@ void sceneSix() {
   tint(160,160,160,255);
   image(barnImg, 405, 204, width, height + 2);
   popMatrix();
+  
+  println(sceneSixTime);
 }
 
 
