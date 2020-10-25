@@ -262,11 +262,26 @@ void sceneSix() {
   
   if(alienB.x < 678){
     alienB.forward(sceneSixTime);
+    FOOTSTEP.play();
     fill(0, 0, 0, 255);
   } else {
+    FOOTSTEP.close();
     fill(235, 204, 80, 255);
-  
   }
+ 
+   if(sceneSixTime >= 35 && sceneSixTime <= 50){
+     DOOR.play();
+   } 
+   
+   if(sceneSixTime >= 70 && sceneSixTime <= 120){
+     DOOR.close();
+     SCREAM.play();
+   } else if(sceneSixTime > 121){
+     SCREAM.close();
+   } else {
+   }
+   
+   
 
   rectMode(CORNERS);
   rect(478, 447, 868, 523);
