@@ -1,4 +1,8 @@
+/***********************
+@desc: Alien Class
+************************/
 class Alien extends MyObject {
+  // load all the alien images
   PImage front = loadImage("alien-front.png");
   PImage forward0 = loadImage("alien-right-0.png");
   PImage forward1 = loadImage("alien-right-1.png");
@@ -6,23 +10,32 @@ class Alien extends MyObject {
   PImage backward0 = loadImage("alien-left-0.png");
   PImage backward1 = loadImage("alien-left-1.png");
   PImage backward2 = loadImage("alien-left-2.png");
-  PImage currentLook;
+  
   boolean landed = false;
+  
+  // alien's y value that determines if alien's feet is on the ground
   float yLAND = (height - (h/2 - 25));
   
+  
+  /***********************
+  @desc: creates alien object, initializes alien object specs
+  ************************/
   Alien(float pX, float pY, float pW, float pH) {
     super(pX, pY, pW, pH);
     super.setImage(front);
   }
   
+  /***********************
+  @desc: has the alien landed or not
+  @return  true, false
+  ************************/
   boolean hasLanded() {
     return landed;
   }
   
-  //void display() {
-  //  super.display();
-  //}
-  
+  /***********************
+  @desc: move the alien down
+  ************************/
   void descend() {
     if (yLAND > y) {
       super.descend();
@@ -31,10 +44,14 @@ class Alien extends MyObject {
     }
   }
   
+  /***********************
+  @desc: move the alien to the right
+  ************************/
   void forward(int time) {
     super.forward();
-    super.y = round(random(yLAND, yLAND + 10));
-    //println(super.x);
+    super.y = round(random(yLAND, yLAND + 10));  // make the alien jitter
+    
+    // sets different alien image 
     if (time % 3 == 0) {
       super.setImage(forward0);
     } else if(time % 3 == 1) {
@@ -44,9 +61,14 @@ class Alien extends MyObject {
     }
   }
   
+  /***********************
+  @desc: move the alien to the left
+  ************************/
   void backward(int time) {
     super.backward();
-    super.y = round(random(yLAND, yLAND + 10));
+    super.y = round(random(yLAND, yLAND + 10)); // make the alien jitter
+    
+    // sets different alien image 
     if (time % 3 == 0) {
       super.setImage(backward0);
     } else if(time % 3 == 1) {
@@ -55,34 +77,38 @@ class Alien extends MyObject {
       super.setImage(backward2);
     }
   }
-  
-    //  pushMatrix();
-    //translate(x, y);
-    //imageMode(CENTER);
-    //image(image, 0, 0, w, h);
-    //popMatrix();
-  
-  // forward
-  // backward
-  // descend
-  // ascend
 }
 
+
+
+/***********************
+@desc: Spaceship Class
+************************/
 class Spaceship extends MyObject {
+  // load spaceship image
   PImage objImage = loadImage("spaceship.png"); 
   float lightHeight = 0;
-  //float lightWidth = w;
   boolean illuminated = false;
   
+  /***********************
+  @desc: creates spaceship object, initializes spaceship object specs
+  ************************/
   Spaceship(float pX, float pY, float pW, float pH) {
     super(pX, pY, pW, pH);
     super.setImage(objImage);
   }
   
+  /***********************
+  @desc: has the spaceship illuminated?
+  @return: true, false
+  ************************/
   boolean isIlluminated(){
     return illuminated;
   }
   
+  /***********************
+  @desc: makes the spaceship large
+  ************************/
   void scaleUp() {
     if (h < height || w < width ) {
         super.scaleUp();
@@ -91,7 +117,9 @@ class Spaceship extends MyObject {
     }
   }
   
-  
+  /***********************
+  @desc: let the spaceship cast light
+  ************************/
   void illuminate() {
     pushMatrix();
     translate(x, y);
@@ -107,6 +135,9 @@ class Spaceship extends MyObject {
     popMatrix();
   }
   
+  /***********************
+  @desc: remove the casted light from the spaceship
+  ************************/
   void deluminate() {
     pushMatrix();
     translate(x, y);
@@ -124,12 +155,17 @@ class Spaceship extends MyObject {
 }
 
 class Asteroid extends MyObject {
-  //PImage objImage = loadImage("asteroid-1.png");
+  
+  /***********************
+  @desc: creates asteroid object, initializes asteroid object specs
+  ************************/
   Asteroid(float pX, float pY, float pW, float pH) {
     super(pX, pY, pW, pH);
-    //super.setImage(objImage);
   }
     
+  /***********************
+  @desc: rotates the asteroid
+  ************************/
   void rotateClockwise() {
     pushMatrix();
     translate(x, y);

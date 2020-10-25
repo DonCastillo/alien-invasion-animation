@@ -8,6 +8,7 @@ class MyObject {
   float w = 0.00;  // object width
   float speed = 0.00;  // speed
   PImage image;  // object image
+  float angle = 0.00;
   
   
   /***********************
