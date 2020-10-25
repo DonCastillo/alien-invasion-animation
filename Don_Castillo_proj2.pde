@@ -1,7 +1,7 @@
 /***********************
  Don Castillo, NMED 3380 B
  Project 2: Alien Invasion Animation
- Last Modified: 10/24/2020 4PM 
+ Last Modified: 10/24/2020 7PM 
  ************************/
 
 
@@ -9,9 +9,11 @@
  @desc: Global Variables
  ************************/
  
+// sound libraries
 import ddf.minim.*;
 Minim minim;
 
+// declare audio variables
 AudioPlayer SPACESHIP_IN_SPACE;
 AudioPlayer TO_THE_EARTH;
 AudioPlayer GLIDE;
@@ -21,26 +23,47 @@ AudioPlayer FOOTSTEP;
 AudioPlayer DOOR;
 AudioPlayer SCREAM;
 
-
+// declare font variable
 PFont font;
-PImage spaceImg, rocketImg, yellowCarImg, brownCarImg, asteroid1Img, asteroid2Img, earthImg, fieldImg, skylineImg, nightImg, farmImg, barnImg;
+
+// declare image variables
+PImage spaceImg;
+PImage rocketImg;
+PImage asteroid1Img;
+PImage asteroid2Img; 
+PImage earthImg; 
+PImage fieldImg;
+PImage skylineImg; 
+PImage nightImg; 
+PImage farmImg; 
+PImage barnImg;
+
+// declare objects
 Asteroid asteroidTop, asteroidDiagonal;
 Spaceship spaceshipA, spaceshipB, spaceshipC, spaceshipD;
 Alien[] alienA;
 Alien alienB;
 MyObject rocket, earth;
-int time;
+
+// setup loading time
+int time;  
+
+// individual counter per scene
 int sceneFiveTime, sceneFourTime, sceneSixTime;
-int numOfAliens;
+
+// is it the last scene true or false?
 boolean isLastScene;
 
 
+/***********************
+@desc: Sets up the objects and assets needed for the animation  
+************************/
 void setup() {
   // width and height of the window
   size(1000, 600);                  
 
   // set default background
-  //background(0);       
+  background(0);       
 
   // load text font
   font = loadFont("Consolas-48.vlw");  
@@ -57,7 +80,7 @@ void setup() {
   farmImg = loadImage("farm.jpg");
   barnImg = loadImage("barn.png");
   
-  // initialize sound effects
+  // load all sound effects
   minim = new Minim(this);
   SPACESHIP_IN_SPACE = minim.loadFile("spaceshipInSpace.mp3");
   TO_THE_EARTH = minim.loadFile("toTheEarth.mp3");
@@ -74,15 +97,18 @@ void setup() {
   setSceneFourObjects();
   setSceneFiveObjects();
   setSceneSixObjects();
-  setSceneSevenObjects();
+  //setSceneSevenObjects();
 
+  
   time = millis();
   frameRate(60);
   isLastScene = false;
 }
 
 
-
+/***********************
+@desc: Plays each scene depending on the elapsed time 
+************************/
 void draw() {
   int m = millis() - time;
   
@@ -111,282 +137,323 @@ void draw() {
   }
 }
 
-void mousePressed() {
-
-}
-
+/***********************
+@desc: Keyboard controls
+************************/
 void keyPressed() {
   switch(key) {
     case ' ':
       if(isLastScene){
-        setup();
+        setup();  
       }
       break;
-      
   }
 }
 
-
-/***********************
- @desc: Scene 1
- displays the title of the animation
- ************************/
-void sceneOne() {
-  setBackground(spaceImg, color(201, 201, 201, 255));        // displays space image as background
-  setTitle("The Invasion");                               // displays title
-}
-
-
-/***********************
- @desc: Scene 2
- displays the title of the animation
- ************************/
-void sceneTwo() {
-  // display background
-  setBackground(spaceImg, color(201, 201, 201, 255));
-
-  // display top asteroids
-  asteroidTop.backward();
-  asteroidTop.rotateClockwise();
-
-  // display bottom asteroids
-  asteroidDiagonal.toBottomRight();
-  asteroidDiagonal.rotateClockwise();
-
-  // display spaceships
-  spaceshipA.display();
-  spaceshipA.forward();
-  SPACESHIP_IN_SPACE.play();
-
-  rocket.display();
-  rocket.toTopLeft();
-}
-
-/***********************
- @desc: Scene 3
- displays the title of the animation
- ************************/
-void sceneThree() {
-  SPACESHIP_IN_SPACE.close();
-  // display background
-  setBackground(spaceImg, color(201, 201, 201, 255));
-
-  // display earth
-  earth.display();
-
-  // display spaceship
-  spaceshipB.display();
-  spaceshipB.scaleDown();
-  TO_THE_EARTH.play();
-}
-
-
-/***********************
- @desc: Scene 4
- displays the title of the animation
- ************************/
-void sceneFour() {
-  TO_THE_EARTH.close();
-  sceneFourTime++;
-  background(0);
-  setBackground(nightImg, color(150, 150, 150, 225));
-  spaceshipC.forward();
-  GLIDE.play();
-
-  
-  if((spaceshipC.x >= 150 && spaceshipC.x <= 250) || (spaceshipC.x >= 450 && spaceshipC.x <= 550) || (spaceshipC.x >= 750 && spaceshipC.x <= 850)) {
-    spaceshipC.illuminate();
-  } else {
-    spaceshipC.deluminate();
-  }
+/**********************************************************************************
+ SCENES
+ **********************************************************************************/
  
-  spaceshipC.display();
-  setBackground(skylineImg, color(150, 150, 150, 250));
-  //println("x: " + spaceshipC.x + " y: " + spaceshipC.y);
-  println(sceneFourTime);
-}
+    /***********************
+     @desc: Scene 1
+            displays the title of the animation
+     ************************/
+    void sceneOne() {
+      // scene background
+      setBackground(spaceImg, color(201, 201, 201, 255));  
+      
+      // scene title
+      setTitle("The Invasion");                               
+    }
 
 
-/***********************
- @desc: Scene 5
- displays the title of the animation
- ************************/
-void sceneFive() {
-  GLIDE.close();
-  sceneFiveTime++;
+    /***********************
+     @desc: Scene 2
+            lone spaceship travels in space
+     ************************/
+    void sceneTwo() {
+      // scene background
+      setBackground(spaceImg, color(201, 201, 201, 255));
+    
+      // display top asteroids
+      asteroidTop.backward();
+      asteroidTop.rotateClockwise();
+    
+      // display bottom asteroids
+      asteroidDiagonal.toBottomRight();
+      asteroidDiagonal.rotateClockwise();
+    
+      // display spaceships
+      spaceshipA.display();
+      spaceshipA.forward();
+      
+      // play spaceship sound
+      SPACESHIP_IN_SPACE.play();
+    
+      // display rocket
+      rocket.display();
+      rocket.toTopLeft();
+    }
 
 
-  // display background
-  setBackground(fieldImg, color(200, 200, 200, 255));
+    /***********************
+     @desc: Scene 3
+            spaceship travels to Earth
+     ************************/
+    void sceneThree() {
+      // stop previous sound
+      SPACESHIP_IN_SPACE.close();
+      
+      // scene background
+      setBackground(spaceImg, color(201, 201, 201, 255));
+    
+      // display earth
+      earth.display();
+    
+      // display spaceship
+      spaceshipB.display();
+      spaceshipB.scaleDown();
+      
+      // play spaceship sound
+      TO_THE_EARTH.play();
+    }
 
-  // display aliens if spaceship has illuminated
-  if (spaceshipD.isIlluminated()) {   
-    for (int i = 0; i < alienA.length; ++i) {
-      alienA[i].display();
-      alienA[i].descend();
-      if (alienA[i].hasLanded()) {
-        if (i % 2 == 0) {
-          alienA[i].forward(sceneFiveTime);
-        } else {
-          alienA[i].backward(sceneFiveTime);
+
+    /***********************
+     @desc: Scene 4
+            spaceship glides over the city
+     ************************/
+    void sceneFour() {
+      // stops previous sound
+      TO_THE_EARTH.close();
+      
+      // scene counter
+      sceneFourTime++;
+      
+      // display night sky background
+      background(0);
+      setBackground(nightImg, color(150, 150, 150, 225));
+      
+      // make spaceship move
+      spaceshipC.forward();
+      
+      //playing gliding sound
+      GLIDE.play();
+    
+      // make the spaceship cast light at a specified time
+      if((spaceshipC.x >= 150 && spaceshipC.x <= 250) || (spaceshipC.x >= 450 && spaceshipC.x <= 550) || (spaceshipC.x >= 750 && spaceshipC.x <= 850)) {
+        spaceshipC.illuminate();
+      } else {
+        spaceshipC.deluminate();
+      }
+     
+      // display spaceship
+      spaceshipC.display();
+      
+      // dispplay building foreground
+      setBackground(skylineImg, color(150, 150, 150, 250));
+    }
+
+
+    /***********************
+     @desc: Scene 5
+            aliens land
+     ************************/
+    void sceneFive() {
+      // stop previous sound
+      GLIDE.close();
+      
+      // scene counter
+      sceneFiveTime++;
+    
+      // scene background
+      setBackground(fieldImg, color(200, 200, 200, 255));
+    
+      // display aliens if spaceship has illuminated
+      if (spaceshipD.isIlluminated()) {   
+        for (int i = 0; i < alienA.length; ++i) {
+          alienA[i].display();
+          alienA[i].descend();
+          if (alienA[i].hasLanded()) {
+            if (i % 2 == 0) {
+              alienA[i].forward(sceneFiveTime);
+            } else {
+              alienA[i].backward(sceneFiveTime);
+            }
+          }
         }
       }
+    
+      // display spaceship
+      spaceshipD.scaleUp();
+      spaceshipD.display();
+      
+      // play sounds depending on the elapsed time
+      if(sceneFiveTime >= 100 && sceneFiveTime <= 150){
+        EXITING.play();
+      } else if(sceneFiveTime > 151 ){
+        EXITING.close();
+        LANDING.play();
+      }
     }
-  }
-
-  // display spaceship
-  spaceshipD.scaleUp();
-  spaceshipD.display();
-  
-  if(sceneFiveTime >= 100 && sceneFiveTime <= 150){
-    EXITING.play();
-  } else if(sceneFiveTime > 151 ){
-    EXITING.close();
-    LANDING.play();
-  }
-
-  //println(sceneFiveTime);
-}
 
 
-/***********************
- @desc: Scene 6
- displays the title of the animation
- ************************/
-void sceneSix() {
-  LANDING.close();
-  sceneSixTime++;
-  setBackground(farmImg, color(150, 150, 150, 255));
-  
-  alienB.display();
-  
-  if(alienB.x < 678){
-    alienB.forward(sceneSixTime);
-    FOOTSTEP.play();
-    fill(0, 0, 0, 255);
-  } else {
-    FOOTSTEP.close();
-    fill(235, 204, 80, 255);
-  }
- 
-   if(sceneSixTime >= 35 && sceneSixTime <= 50){
-     DOOR.play();
-   } 
+
+    /***********************
+     @desc: Scene 6
+            alien awakens a sleeping human
+     ************************/
+    void sceneSix() {
+      // stop previous sound
+      LANDING.close();
+      
+      // scene counter
+      sceneSixTime++;
+      
+      // scene background
+      setBackground(farmImg, color(150, 150, 150, 255));
+      
+      // display alien
+      alienB.display();
+      
+      // footstep sound
+      if(alienB.x < 678){
+        alienB.forward(sceneSixTime);
+        FOOTSTEP.play();
+        fill(0, 0, 0, 255);
+      } else {
+        FOOTSTEP.close();
+        fill(235, 204, 80, 255);
+      }
+     
+       // door sound
+       if(sceneSixTime >= 35 && sceneSixTime <= 50){
+         DOOR.play();
+       } 
+       
+       // scream sound
+       if(sceneSixTime >= 70 && sceneSixTime <= 120){
+         DOOR.close();
+         SCREAM.play();
+       } else if(sceneSixTime > 121){
+         SCREAM.close();
+       } else {
+       }
    
-   if(sceneSixTime >= 70 && sceneSixTime <= 120){
-     DOOR.close();
-     SCREAM.play();
-   } else if(sceneSixTime > 121){
-     SCREAM.close();
-   } else {
-   }
-   
-   
-
-  rectMode(CORNERS);
-  rect(478, 447, 868, 523);
-  rectMode(CORNER);
-  
-  pushMatrix();
-  noFill();
-  imageMode(CORNERS);
-  tint(160,160,160,255);
-  image(barnImg, 405, 204, width, height + 2);
-  popMatrix();
-  
-  println(sceneSixTime);
-}
+      // light inside the barn
+      rectMode(CORNERS);
+      rect(478, 447, 868, 523);
+      rectMode(CORNER);
+      
+      // barn image
+      pushMatrix();
+      noFill();
+      imageMode(CORNERS);
+      tint(160,160,160,255);
+      image(barnImg, 405, 204, width, height + 2);
+      popMatrix();
+    }
 
 
-/***********************
- @desc: Scene 7
- displays the title of the animation
- ************************/
-void sceneSeven() {
-  setBackground(spaceImg, color(201, 201, 201, 255));
-  setTitle("The End");  
-}
+    /***********************
+     @desc: Scene 7
+            displays end sequece and credits
+     ************************/
+    void sceneSeven() {
+      setBackground(spaceImg, color(201, 201, 201, 255));
+      setTitle("The End");  
+    }
 
 
-void setSceneTwoObjects() {
 
-  // set asteroids
-  float dimension = random(50, 300);
-  asteroidTop = new Asteroid(width + 2, random(height/2, height), dimension, dimension);
-  asteroidTop.setImage(asteroid1Img);
-  asteroidTop.setSpeed(random(2, 10));
+/**********************************************************************************
+  SCENE SETUP
+**********************************************************************************/
 
-  dimension = random(50, 150);
-  asteroidDiagonal = new Asteroid(-2, -2, dimension, dimension);
-  asteroidDiagonal.setImage(asteroid2Img);
-  asteroidDiagonal.setSpeed(random(2, 5));
-
-  // set spaceship
-  spaceshipA = new Spaceship(-2, height/2, 200, 200);
-  spaceshipA.setSpeed(9);
-
-
-  // set rocket
-  rocket = new MyObject(width + 5, height + 5, 200, 200);
-  rocket.setImage(rocketImg);
-  rocket.setSpeed(15);
-}
-
-
-void setSceneThreeObjects() {
-
-  // set earth
-  earth = new MyObject(width/2, height/2, 800, 600);
-  earth.setImage(earthImg);
-
-  // set spaceship
-  spaceshipB = new Spaceship(width/2, height/2, width * 2, width * 2);
-  spaceshipB.setSpeed(75);
-}
-
-void setSceneFourObjects() {
-  sceneFourTime = 0;
-  spaceshipC = new Spaceship(-2, height/4, 200, 200);
-  spaceshipC.setSpeed(10);
-}
-
-void setSceneFiveObjects() {
-  // allocate memory
-  alienA = new Alien[6];
-
-  sceneFiveTime = 0;
-  // set spaceship and aliens
-  float spaceshipWidth = 0;
-  float spaceshipHeight = 0;
-  float spaceshipSpeed = 7;
-  float xPos = width/2;
-  float yPos = height/8;
-  spaceshipD = new Spaceship(xPos, yPos, spaceshipWidth, spaceshipHeight);
-  spaceshipD.setSpeed(spaceshipSpeed);
-
-  // set aliens
-  float alienWidth = 300;
-  float alienHeight = 250;
-  float alienSpeed = 10;
-  float landingPos = height - (alienHeight/2 - 25);
-  for (int i = 0; i < alienA.length; ++i) {
-    alienA[i] = new Alien(xPos, yPos - 200 * i, alienWidth, alienHeight);
-    alienA[i].setSpeed(alienSpeed);
-  }
-
-  numOfAliens = alienA.length;
-}
-
-void setSceneSixObjects() {
-  sceneSixTime = 0;
-  alienB = new Alien(-2, (height - 100), 300, 250);
-  alienB.setSpeed(10);
-}
-
-void setSceneSevenObjects() {
-}
+    /***********************
+     @desc: Scene 2
+     ************************/
+    void setSceneTwoObjects() {
+      // set asteroids
+      float dimension = random(50, 300);
+      asteroidTop = new Asteroid(width + 2, random(height/2, height), dimension, dimension);
+      asteroidTop.setImage(asteroid1Img);
+      asteroidTop.setSpeed(random(2, 10));
+    
+      dimension = random(50, 150);
+      asteroidDiagonal = new Asteroid(-2, -2, dimension, dimension);
+      asteroidDiagonal.setImage(asteroid2Img);
+      asteroidDiagonal.setSpeed(random(2, 5));
+    
+      // set spaceship
+      spaceshipA = new Spaceship(-2, height/2, 200, 200);
+      spaceshipA.setSpeed(9);
+    
+      // set rocket
+      rocket = new MyObject(width + 5, height + 5, 200, 200);
+      rocket.setImage(rocketImg);
+      rocket.setSpeed(15);
+    }
 
 
+    /***********************
+     @desc: Scene 3
+     ************************/
+    void setSceneThreeObjects() {
+      // set earth
+      earth = new MyObject(width/2, height/2, 800, 600);
+      earth.setImage(earthImg);
+    
+      // set spaceship
+      spaceshipB = new Spaceship(width/2, height/2, width * 2, width * 2);
+      spaceshipB.setSpeed(75);
+    }
+
+    /***********************
+     @desc: Scene 4
+     ************************/
+    void setSceneFourObjects() {
+      sceneFourTime = 0;
+      spaceshipC = new Spaceship(-2, height/4, 200, 200);
+      spaceshipC.setSpeed(10);
+    }
+
+    /***********************
+     @desc: Scene 5
+     ************************/
+    void setSceneFiveObjects() {
+      // allocate memory
+      alienA = new Alien[6];
+    
+      sceneFiveTime = 0;
+      // set spaceship and aliens
+      float spaceshipWidth = 0;
+      float spaceshipHeight = 0;
+      float spaceshipSpeed = 7;
+      float xPos = width/2;
+      float yPos = height/8;
+      spaceshipD = new Spaceship(xPos, yPos, spaceshipWidth, spaceshipHeight);
+      spaceshipD.setSpeed(spaceshipSpeed);
+    
+      // set aliens
+      float alienWidth = 300;
+      float alienHeight = 250;
+      float alienSpeed = 10;
+      float landingPos = height - (alienHeight/2 - 25);
+      for (int i = 0; i < alienA.length; ++i) {
+        alienA[i] = new Alien(xPos, yPos - 200 * i, alienWidth, alienHeight);
+        alienA[i].setSpeed(alienSpeed);
+      }
+    }
+
+    /***********************
+     @desc: Scene 6
+     ************************/
+    void setSceneSixObjects() {
+      sceneSixTime = 0;
+      alienB = new Alien(-2, (height - 100), 300, 250);
+      alienB.setSpeed(10);
+    }
 
 
 
