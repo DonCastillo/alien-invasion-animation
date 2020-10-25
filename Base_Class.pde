@@ -6,9 +6,8 @@ class MyObject {
   float y = 0.00;  // y-coordinate
   float h = 0.00;  // object height
   float w = 0.00;  // object width
-  float speed = 0.00;
+  float speed = 0.00;  // speed
   PImage image;  // object image
-  float angle = 0.00;
   
   
   /***********************
@@ -19,19 +18,36 @@ class MyObject {
     y = pY;
     w = pW;
     h = pH;
-    speed = 1;
+    speed = 1;  // default speed
   }
   
+  /***********************
+  @desc: sets object speed
+  @param:  speed to be added
+  ************************/
   void setSpeed(float pSpeed) {
     speed = pSpeed;
   }
+  
+  /***********************
+  @desc: sets object image
+  @param:  image to be set
+  ************************/
   void setImage(PImage pImage) {
     image = pImage;
   }
+  
+  /***********************
+  @desc: get object image
+  @return:  object image  
+  ************************/
   PImage getImage(){
     return image;
   }
   
+  /***********************
+  @desc: display object image
+  ************************/
   void display() {
     pushMatrix();
     translate(x, y);
@@ -40,27 +56,45 @@ class MyObject {
     popMatrix();
   }
   
+  /***********************
+  @desc: move object to the right
+  ************************/
   void forward() {
     x = x + speed;
   }
   
+  /***********************
+  @desc: move object to the left
+  ************************/
   void backward() {
     x = x - speed;
   }
   
+  /***********************
+  @desc: move object up
+  ************************/
   void ascend() {
     y = y - speed;
   }
   
+  /***********************
+  @desc: move object down
+  ************************/
   void descend() {
     y = y + speed;
   }
   
+  /***********************
+  @desc: zoom in the object
+  ************************/
   void scaleUp() {
     h = h + speed;
     w = w + speed;
   }
   
+  /***********************
+  @desc: zoom out the object
+  ************************/
   void scaleDown() {
     if ( h > 0) {
       h = h - speed;
@@ -77,21 +111,33 @@ class MyObject {
     }
   }
 
+  /***********************
+  @desc: move the object to the top left
+  ************************/
   void toTopLeft() {
     ascend();
     backward();
   }
   
+  /***********************
+  @desc: move the object to the top right
+  ************************/
   void toTopRight() {
     ascend();
     forward();
   }
   
+  /***********************
+  @desc: move the object to the bottom left
+  ************************/
   void toBottomLeft() {
     descend();
     backward();
   }
   
+  /***********************
+  @desc: move the object to the bottom right
+  ************************/
   void toBottomRight() {
     descend();
     forward();
