@@ -1,7 +1,7 @@
 /***********************
  Don Castillo, NMED 3380 B
- Project 2: Alien Invasion Animation
- Last Modified: 10/24/2020 7PM 
+ Project 2: The Unexpected Visitor Animation
+ Last Modified: 10/24/2020 10:30PM 
  ************************/
 
 
@@ -97,7 +97,6 @@ void setup() {
   setSceneFourObjects();
   setSceneFiveObjects();
   setSceneSixObjects();
-  //setSceneSevenObjects();
 
   
   time = millis();
@@ -127,11 +126,14 @@ void draw() {
   else if(m >= 20000 && m < 37000){
     sceneFive();
   }
-  else if(m >= 37000 && m < 46000){
+  else if(m >= 37000 && m < 44000){
     sceneSix();
-  } 
-  else{
+  }
+  else if(m >= 44000 && m < 48000){
     sceneSeven();
+  }
+  else{
+    sceneEight();
     m = millis();
     isLastScene = true;
   }
@@ -163,7 +165,7 @@ void keyPressed() {
       setBackground(spaceImg, color(201, 201, 201, 255));  
       
       // scene title
-      setTitle("The Invasion");                               
+      setTitle("The Unexpected Visitor");                               
     }
 
 
@@ -357,11 +359,37 @@ void keyPressed() {
 
     /***********************
      @desc: Scene 7
-            displays end sequece and credits
+            displays end sequece
      ************************/
     void sceneSeven() {
       setBackground(spaceImg, color(201, 201, 201, 255));
       setTitle("The End");  
+    }
+    
+     /***********************
+     @desc: Scene 8
+            displays credits
+     ************************/
+    void sceneEight() {
+       setBackground(spaceImg, color(201, 201, 201, 255));
+       pushMatrix();
+       translate(50, 50);
+       textSize(20);
+       textAlign(LEFT, TOP);
+       text("Animation by Don Castillo", 0, 0);
+       text("Vector images drawn by Don Castillo", 0, 30);
+       text("SOUND EFFECTS", 0, 100);
+       text("Alien/UFO sound, from superfunnysheet", 0, 130);
+       text("Door sound, from Sounds Recorded", 0, 160);
+       text("Footstep sound, from SFX Box", 0, 190);
+       text("Scream sound, from Colors of Videos", 0, 220);
+       
+       text("IMAGES", 0, 300);
+       text("Rural at Night, from kissCC0", 0, 330);
+       text("City skyline at night, from PngItem", 0, 360);
+       text("Night sky, from Karen Hovsepyan video", 0, 390);
+       text("Space, from WallpaperAccess", 0, 420);
+       popMatrix();
     }
 
 
