@@ -7,7 +7,4 @@ The program works well in a regular computer. In case of Out of Memory Error due
 you can increase the maximum available memory by going to FILE > PREFERENCES > INCREASE MAXIMUM AVAILABLE MEMORY and set the memory higher
 than the default 256 MB.
 
-<video width="100%" controls>
-  <source src="./demo/video-demo.mp4" type="video/mp4">
-  Your browser does not support HTML video.
-</video>
+<img src="./screenshots/demo.gif" alt="demo animation">
